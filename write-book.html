@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Написание книги</title>
+  <link rel="stylesheet" href="css/books.css" />
+  <script src="write-book.js" defer></script>
+</head>
+<body>
+<div class="container">
+  <h1>Написание книги</h1>
+
+  <!-- Имя персонажа -->
+  <label>Имя главного героя:
+    <input type="text" id="hero-name" maxlength="30"/>
+  </label>
+
+  <!-- Профессия -->
+  <label>Профессия:
+    <select id="hero-job">
+      <!-- Зависит от жанра, будет обновляться скриптом -->
+    </select>
+  </label>
+
+  <!-- Концовка -->
+  <label>Концовка:
+    <select id="ending">
+      <option>Хорошая</option>
+      <option>Плохая</option>
+    </select>
+  </label>
+
+  <!-- Место событий -->
+  <label>Место событий:
+    <input type="text" id="location" placeholder="Например: Нью-Йорк, Лес, Галактика Z"/>
+  </label>
+
+  <!-- Редактирование текста -->
+  <h2>Текст книги</h2>
+  <textarea id="book-text" rows="10" placeholder="Начните писать свою книгу..."></textarea>
+
+  <button id="save-book">Сохранить книгу</button>
+
+  <div id="final-preview"></div>
+</div>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const genreToJobs = {
+      'Детектив': ['Сыщик', 'Бывший коп', 'Журналист'],
+      'Детское': ['Учитель', 'Обычный ребенок', 'Фантазёр'],
+      'Комиксы': ['Супергерой', 'Учёный', 'Боец'],
+      'Мистика': ['Медиум', 'Оккультист', 'Обыватель'],
+      'Приключения': ['Путешественник', 'Картограф', 'Археолог'],
+      'Роман': ['Писатель', 'Художник', 'Фотограф'],
+      'Фантастика': ['Киборг', 'Инженер', 'Космонавт'],
+      'Фэнтези': ['Маг', 'Воин', 'Эльф']
+    };
+
+    const jobSelect = document.getElementById('hero-job');
+    const genre = JSON.parse(localStorage.getItem('bookDraft'))?.genre || 'Фэнтези';
+
+    updateJobs(genre);
+
+    function updateJobs(genre) {
+      jobSelect.innerHTML = '';
+      genreToJobs[genre].forEach(job => {
+        const option = document.createElement('option');
+        option.textContent = job;
+        jobSelect.appendChild(option);
+      });
+    }
+
+    document.getElementById('save-book').addEventListener('click', () => {
+      const hero = document.getElementById('hero-name').value.trim();
+      const job = jobSelect.value;
+      const ending = document.getElementById('ending').value;
+      const place = document.getElementById('location').value.trim();
+      const text = document.getElementById('book-text').value.trim();
+
+      if (!hero || !text || !place) {
+        alert('Заполните все поля!');
+        return;
+      }
+
+      const fullBook = {
+        hero, job, ending, place, text
+      };
+
+      localStorage.setItem('fullBook', JSON.stringify(fullBook));
+
+      // Предпросмотр
+      document.getElementById('final-preview').innerHTML = `
+      <h3>Книга готова!</h3>
+      <p><strong>Герой:</strong> ${hero} (${job})</p>
+      <p><strong>Место:</strong> ${place}</p>
+      <p><strong>Концовка:</strong> ${ending}</p>
+      <p><strong>Текст:</strong></p>
+      <div class="book-preview">${text.replace(/\n/g, '<br>')}</div>
+    `;
+    });
+  });
+
+</script>
+</html>

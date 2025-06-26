@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Книги</title>
+    <link rel="stylesheet" href="css/books.css">
+    <link rel="stylesheet" href="css/finance.css">
+    <link rel="stylesheet" href="css/finance.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .container{
+        width: 80%;
+    }
+    .reader-body {
+        margin-top: 15px;
+        max-height: 400px;
+        overflow-y: auto;
+        line-height: 1.6;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+
+    .book-card {
+        background-color: #333;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    .book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.6);
+    }
+
+    .book-cover img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-bottom: 2px solid #444;
+    }
+
+    .book-info {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .book-info h3 {
+        margin: 0;
+        font-size: 16px;
+        color: #ffd700;
+    }
+
+    .book-info p {
+        margin: 5px 0 0;
+        font-size: 14px;
+        color: #ccc;
+    }
+
+    .reader {
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        background-color: #1a1a2e;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.7);
+        z-index: 1000;
+        padding: 20px;
+    }
+
+    .reader-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .reader-header h2 {
+        margin: 0;
+        font-size: 20px;
+        color: #ffd700;
+    }
+
+    .reader-body {
+        margin-top: 15px;
+        max-height: 400px;
+        overflow-y: auto;
+        white-space: pre-line;
+        line-height: 1.5;
+    }
+
+</style>
+<body>
+<!-- Навигация -->
+<div class="top-nav">
+    <a href="character.html" class="nav-item" id="nav-profile">
+        <i class="fas fa-user"></i>
+        <span>Профиль</span>
+    </a>
+    <a href="finance.html" class="nav-item" id="nav-finance">
+        <i class="fas fa-coins"></i>
+        <span>Финансы</span>
+    </a>
+    <a href="books.html" class="nav-item active" id="nav-books">
+        <i class="fas fa-book"></i>
+        <span>Книги</span>
+    </a>
+    <a href="character-upgrade.html" class="nav-item" id="nav-stats">
+        <i class="fas fa-chart-line"></i>
+        <span>Характеристики</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-life">
+        <i class="fas fa-heart"></i>
+        <span>Жизнь</span>
+    </a>
+</div>
+
+<div class="container">
+    <!-- Секция создания книги -->
+    <div class="create-book-section">
+        <h2>Создание книги</h2>
+        <label>Название:</label>
+        <input type="text" id="bookTitle">
+
+        <label>Жанр:</label>
+        <select id="bookGenre">
+            <option>Детектив</option>
+            <option>Детское</option>
+            <option>Комиксы</option>
+            <option>Мистика</option>
+            <option>Приключения</option>
+            <option>Роман</option>
+            <option>Фантастика</option>
+            <option>Фэнтези</option>
+        </select>
+
+        <label>Количество страниц:</label>
+        <input type="range" min="50" max="400" step="50" value="100" id="pageCount">
+        <span id="pageCountValue">100</span>
+
+        <h3>Распределение очков (всего 10)</h3>
+        <label>Сюжет: <span id="plotVal">0</span></label><input type="range" id="plot" min="0" max="10" value="0">
+        <label>Описание мира: <span id="worldVal">0</span></label><input type="range" id="world" min="0" max="10" value="0">
+        <label>Любовная линия: <span id="romanceVal">0</span></label><input type="range" id="romance" min="0" max="10" value="0">
+        <label>Иллюстрация: <span id="artVal">0</span></label><input type="range" id="art" min="0" max="10" value="0">
+
+        <h3>Обложка</h3>
+        <label>Цвет:</label><input type="color" id="coverColor">
+        <label>Иллюстрации:</label><input type="text" placeholder="URL картинки" id="coverImage">
+
+        <button onclick="createBook()">Создать книгу</button>
+        <div id="preview"></div>
+    </div>
+
+    <!-- Секция написания книги -->
+    <div class="write-book-section" style="display:none;">
+        <h2>Написание книги</h2>
+        <label>Имя главного героя:</label><input type="text" id="heroName">
+        <label>Профессия:</label><select id="heroProfession"></select>
+        <label>Концовка:</label>
+        <select id="endingType">
+            <option value="good">Хорошая</option>
+            <option value="bad">Плохая</option>
+        </select>
+        <label>Редактируйте текст книги:</label>
+        <textarea id="bookText"></textarea>
+        <label>Место событий:</label><input type="text" id="bookSetting">
+
+        <button onclick="finalizeBook()">Завершить книгу</button>
+    </div>
+
+    <!-- Секция списка книг -->
+    <div class="library-section">
+        <h2>Мои книги</h2>
+        <div id="booksList"></div>
+    </div>
+</div>
+<div class="bottom-nav">
+    <div class="bottom-item">
+        <i class="fas fa-calendar-week"></i>
+        <span id="current-week">Неделя 1</span>
+    </div>
+    <div class="bottom-item">
+        <i class="fas fa-clock"></i>
+        <span id="game-time">День 1, 08:00</span>
+    </div>
+    <div class="bottom-item">
+        <i class="fas fa-wallet"></i>
+        <span class="money-display" id="current-money">0 ₽</span>
+    </div>
+</div>
+</body>
+<script>
+    const professionsByGenre = {
+        'Детектив': ['Сыщик', 'Бывший коп', 'Журналист'],
+        'Детское': ['Ученик', 'Педагог', 'Исследователь'],
+        'Комиксы': ['Супергерой', 'Антигерой', 'Учёный'],
+        'Мистика': ['Медиум', 'Охотник за привидениями', 'Экзорцист'],
+        'Приключения': ['Авантюрист', 'Археолог', 'Путешественник'],
+        'Роман': ['Писатель', 'Актёр', 'Музыкант'],
+        'Фантастика': ['Астронавт', 'Учёный', 'Инженер'],
+        'Фэнтези': ['Маг', 'Воин', 'Эльф']
+    };
+
+    let books = JSON.parse(localStorage.getItem('books')) || [];
+
+    function updateSliders() {
+        const total = ['plot', 'world', 'romance', 'art']
+            .map(id => parseInt(document.getElementById(id).value))
+            .reduce((a, b) => a + b, 0);
+
+        ['plot', 'world', 'romance', 'art'].forEach(id => {
+            document.getElementById(id + 'Val').innerText = document.getElementById(id).value;
+            document.getElementById(id).max = parseInt(document.getElementById(id).value) + (10 - total);
+        });
+    }
+
+    ['plot', 'world', 'romance', 'art'].forEach(id => {
+        document.getElementById(id).addEventListener('input', updateSliders);
+    });
+
+    document.getElementById('pageCount').addEventListener('input', e => {
+        document.getElementById('pageCountValue').innerText = e.target.value;
+    });
+
+    function createBook() {
+        const title = document.getElementById('bookTitle').value;
+        const genre = document.getElementById('bookGenre').value;
+        const pages = document.getElementById('pageCount').value;
+        const plot = parseInt(document.getElementById('plot').value);
+        const world = parseInt(document.getElementById('world').value);
+        const romance = parseInt(document.getElementById('romance').value);
+        const art = parseInt(document.getElementById('art').value);
+        const total = plot + world + romance + art;
+
+        if (!title || total !== 10) {
+            alert('Заполните название и распределите все 10 очков.');
+            return;
+        }
+
+        const color = document.getElementById('coverColor').value;
+        const img = document.getElementById('coverImage').value;
+
+        const bookData = { title, genre, pages, plot, world, romance, art, color, img };
+        sessionStorage.setItem('currentBook', JSON.stringify(bookData));
+
+        showPreview(bookData);
+    }
+
+    function showPreview(book) {
+        document.querySelector('.create-book-section').style.display = 'none';
+        document.querySelector('.write-book-section').style.display = 'block';
+
+        const profSelect = document.getElementById('heroProfession');
+        profSelect.innerHTML = '';
+        professionsByGenre[book.genre].forEach(p => {
+            const opt = document.createElement('option');
+            opt.textContent = p;
+            profSelect.appendChild(opt);
+        });
+
+        document.getElementById('bookText').value = `Название: ${book.title}\nЖанр: ${book.genre}\nСтраниц: ${book.pages}\n...начало книги...`;
+    }
+
+    function finalizeBook() {
+        const current = JSON.parse(sessionStorage.getItem('currentBook'));
+        current.hero = document.getElementById('heroName').value;
+        current.profession = document.getElementById('heroProfession').value;
+        current.ending = document.getElementById('endingType').value;
+        current.text = document.getElementById('bookText').value;
+        current.setting = document.getElementById('bookSetting').value;
+        current.date = new Date().toLocaleDateString();
+
+        books.push(current);
+        localStorage.setItem('books', JSON.stringify(books));
+        sessionStorage.removeItem('currentBook');
+
+        renderBooks();
+        document.querySelector('.write-book-section').style.display = 'none';
+        document.querySelector('.create-book-section').style.display = 'block';
+
+        stats.books = parseInt(stats.books) + 1;
+        if (stats.currentContract) {
+            const contract = stats.currentContract;
+            if (
+                current.genre === contract.genre &&
+                parseInt(current.pages) >= parseInt(contract.pages)
+            ) {
+                const bonus = Math.round(contract.bonus * 100);
+                stats.money += bonus;
+                localStorage.setItem('money', stats);
+                document.getElementById('current-money').textContent = `${stats.money.toLocaleString()} ₽`;
+
+                alert(`Контракт выполнен! Бонус: ${bonus} монет.`);
+                stats.currentContract = null
+                stats.contracts = parseInt(stats.contracts) + 1
+                updateStats(stats)
+            }
+        }
+    }
+
+    function renderBooks() {
+        books =  JSON.parse(localStorage.getItem('books')) || [];
+        const list = document.getElementById('booksList');
+        list.innerHTML = '';
+        const grid = document.createElement('div');
+        grid.className = 'books-grid';
+        books.forEach((book, index) => {
+            const card = document.createElement('div');
+            card.className = 'book-card';
+            card.style.backgroundColor = book.color;
+            card.innerHTML = `
+      <div class="book-cover">
+        <img src="${book.img}" alt="Cover"">
+      </div>
+      <div class="book-info">
+        <h3>${book.title}</h3>
+        <p>Жанр: ${book.genre}</p>
+        <p>Главный герой: ${book.hero}</p>
+        <p>Место: ${book.setting}</p>
+      </div>
+    `;
+            card.addEventListener('click', () => openReader(index));
+            grid.appendChild(card);
+        });
+        list.appendChild(grid);
+    }
+
+    function openReader(index) {
+        const book = books[index];
+
+        // Удаляем старый ридер, если он есть
+        const oldReader = document.querySelector('.reader');
+        if (oldReader) oldReader.remove();
+
+        const reader = document.createElement('div');
+        reader.className = 'reader';
+        reader.style.position = 'fixed';
+        reader.style.top = '10%';
+        reader.style.left = '50%';
+        reader.style.transform = 'translateX(-50%)';
+        reader.style.width = '80%';
+        reader.style.height = '80%';
+        reader.style.backgroundColor = '#2c2c3e';
+        reader.style.color = '#fff';
+        reader.style.padding = '20px';
+        reader.style.borderRadius = '12px';
+        reader.style.overflowY = 'auto';
+        reader.style.zIndex = '1000';
+        reader.style.boxShadow = '0 0 15px rgba(0,0,0,0.7)';
+
+        reader.innerHTML = `
+    <div class="reader-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+      <h2>${book.title}</h2>
+      <button style="background:#ff5555; border:none; border-radius:6px; padding:5px 10px; cursor:pointer; font-weight:bold;">Закрыть</button>
+    </div>
+    <div class="reader-body" style="white-space: pre-wrap; font-size: 16px; line-height:1.5; max-height: 65vh; overflow-y: auto; margin-bottom: 20px;">
+      ${book.text.replace(/\n/g, '<br>')}
+    </div>
+    <div class="reader-footer" style="text-align:center;">
+      ${book.published
+            ? `<p><strong>Книга выпущена</strong></p>
+           <p>Прибыль: ${book.profit} ₽</p>
+           <p>Вероятность успеха: ${(book.successProb * 100).toFixed(1)}%</p>`
+            : `<button id="publishBtn" style="background:#4caf50; border:none; border-radius:8px; padding:10px 20px; color:#fff; cursor:pointer; font-size:16px;">
+             Выпустить тираж за ${book.pages * 5} ₽
+           </button>`
+        }
+    </div>
+  `;
+
+        // Закрыть ридер
+        reader.querySelector('button').onclick = () => reader.remove();
+
+        // Кнопка выпуска тиража (если есть)
+        const publishBtn = reader.querySelector('#publishBtn');
+        if (publishBtn) {
+            publishBtn.addEventListener('click', () => {
+                publishBook(index);
+                reader.remove(); // закрываем ридер после выпуска
+                openReader(index); // открываем заново, чтобы обновить статус
+            });
+        }
+
+        document.body.appendChild(reader);
+    }
+
+
+
+    renderBooks();
+    function getSuccessProbability(book) {
+        const genreWeights = {
+            'Детектив':    { plot:0.4, world:0.3, romance:0.1, art:0.2, colors:['#000000', '#555555'] },
+            'Детское':     { plot:0.2, world:0.3, romance:0.3, art:0.2, colors:['#ffff00', '#00ff00', '#00ffff'] },
+            'Комиксы':     { plot:0.3, world:0.2, romance:0.1, art:0.4, colors:['#ff0000', '#00ff00', '#0000ff'] },
+            'Мистика':     { plot:0.3, world:0.4, romance:0.1, art:0.2, colors:['#4b0082', '#00008b'] },
+            'Приключения': { plot:0.35, world:0.4, romance:0.05, art:0.2, colors:['#8b4513', '#228b22'] },
+            'Роман':       { plot:0.25, world:0.15, romance:0.5, art:0.1, colors:['#ff69b4', '#ff1493'] },
+            'Фантастика':  { plot:0.4, world:0.4, romance:0.05, art:0.15, colors:['#4682b4', '#b0c4de'] },
+            'Фэнтези':     { plot:0.3, world:0.4, romance:0.1, art:0.2, colors:['#daa520', '#006400', '#00008b'] },
+        };
+
+        const weights = genreWeights[book.genre];
+        if(!weights) return 0.1; // малый шанс если жанр неизвестен
+
+        // Нормируем очки из 10 в доли (0..1)
+        const plot = book.plot / 10;
+        const world = book.world / 10;
+        const romance = book.romance / 10;
+        const art = book.art / 10;
+
+        let baseScore = plot*weights.plot + world*weights.world + romance*weights.romance + art*weights.art;
+
+        // Проверка цвета (бонус 0.1)
+        const color = book.color.toLowerCase();
+        const colorBonus = weights.colors.some(c => c.toLowerCase() === color) ? 0.1 : 0;
+
+        // Итоговый шанс успеха с рандомом
+        const randomFactor = Math.random() * 0.2; // 0..0.2 случайный разброс
+
+        let successProbability = baseScore + colorBonus + randomFactor;
+
+        // Ограничиваем максимум 1
+        return Math.min(successProbability, 1);
+    }
+    // Функция для сохранения статистики в localStorage
+    function saveStats(stats) {
+        localStorage.setItem('characterStats', JSON.stringify(stats));
+    }
+
+    // Функция для загрузки статистики из localStorage
+    function loadStats() {
+        const defaultStats = {
+            level: 1,
+            fans: 0,
+            contracts: 0,
+            sales: 0,
+            books: 0,
+            income: 0,
+            reputation: 0,
+            exp: 0,
+            money: 0,
+            week: 1,
+            day: 1,
+            hour: 0,
+            minute: 0
+        };
+        let savedStats = JSON.parse(localStorage.getItem('characterStats'));
+        savedStats.books = JSON.parse(localStorage.getItem('books')).size;
+        return savedStats ? savedStats : defaultStats;
+    }
+
+    // Функция для обновления статистики
+    function updateStats(newStats) {
+        const currentStats = loadStats();
+        const updatedStats = {...currentStats, ...newStats};
+        saveStats(updatedStats);
+        updateUI(updatedStats);
+        return updatedStats;
+    }
+
+    // Функция для обновления интерфейса
+    function updateUI(stats) {
+        document.getElementById('current-week').textContent = `Неделя ${stats.week}`;
+        document.getElementById('game-time').textContent = `День ${stats.day}, ${String(stats.hour).padStart(2, '0')}:${String(stats.minute).padStart(2, '0')}`;
+
+    }
+
+    // Функция для переключения между вкладками
+    function showTab(tab) {
+        const charDetails = document.getElementById('character-details');
+        const statsContainer = document.getElementById('stats-container');
+        const btnCharacter = document.getElementById('btn-character');
+        const btnStats = document.getElementById('btn-stats');
+
+        if (tab === 'character') {
+            charDetails.style.display = 'grid';
+            statsContainer.style.display = 'none';
+            btnCharacter.classList.add('active');
+            btnCharacter.classList.add('btn-primary');
+            btnStats.classList.remove('active');
+            btnStats.classList.remove('btn-primary');
+        } else {
+            charDetails.style.display = 'none';
+            statsContainer.style.display = 'grid';
+            btnStats.classList.add('active');
+            btnStats.classList.add('btn-primary');
+            btnCharacter.classList.remove('active');
+            btnCharacter.classList.remove('btn-primary');
+        }
+
+    }
+
+    // Функция для переключения между разделами
+    function showSection(section) {
+        // Снимаем активность со всех кнопок
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+        });
+
+        // Активируем текущую кнопку
+        document.getElementById(`nav-${section}`).classList.add('active');
+
+        // Здесь будет логика отображения разных разделов
+        // Пока просто показываем сообщение в консоли
+        console.log(`Переключено на раздел: ${section}`);
+
+
+    }
+
+    // Инициализация игрового времени
+    function initGameTime() {
+        let stats = loadStats();
+
+        // Обновляем время каждую секунду (5 секунд = 1 час игры)
+        setInterval(() => {
+            stats.minute += 12; // 5 секунд = 1 час (60 минут / 5 = 12 минут за секунду)
+
+            if (stats.minute >= 60) {
+                stats.minute = 0;
+                stats.hour++;
+            }
+
+            if (stats.hour >= 24) {
+                stats.hour = 0;
+                stats.day++;
+            }
+
+            if (stats.day > 7) {
+                stats.day = 1;
+                stats.week++;
+                // Сохраняем игру при завершении недели
+                updateStats(stats);
+            }
+
+            updateUI(stats)
+        }, 1000); // Обновляем каждую секунду
+    }
+
+    stats = loadStats();
+    initGameTime();
+    money = stats.money;
+    function getSuccessProbability(book) {
+        const genreWeights = {
+            'Детектив':    { plot:0.4, world:0.3, romance:0.1, art:0.2, colors:['#000000', '#555555'] },
+            'Детское':     { plot:0.2, world:0.3, romance:0.3, art:0.2, colors:['#ffff00', '#00ff00', '#00ffff'] },
+            'Комиксы':     { plot:0.3, world:0.2, romance:0.1, art:0.4, colors:['#ff0000', '#00ff00', '#0000ff'] },
+            'Мистика':     { plot:0.3, world:0.4, romance:0.1, art:0.2, colors:['#4b0082', '#00008b'] },
+            'Приключения': { plot:0.35, world:0.4, romance:0.05, art:0.2, colors:['#8b4513', '#228b22'] },
+            'Роман':       { plot:0.25, world:0.15, romance:0.5, art:0.1, colors:['#ff69b4', '#ff1493'] },
+            'Фантастика':  { plot:0.4, world:0.4, romance:0.05, art:0.15, colors:['#4682b4', '#b0c4de'] },
+            'Фэнтези':     { plot:0.3, world:0.4, romance:0.1, art:0.2, colors:['#daa520', '#006400', '#00008b'] },
+        };
+
+        const weights = genreWeights[book.genre];
+        if(!weights) return 0.1; // малый шанс если жанр неизвестен
+
+        // Нормируем очки из 10 в доли (0..1)
+        const plot = book.plot / 10;
+        const world = book.world / 10;
+        const romance = book.romance / 10;
+        const art = book.art / 10;
+
+        let baseScore = plot*weights.plot + world*weights.world + romance*weights.romance + art*weights.art;
+
+        // Проверка цвета (бонус 0.1)
+        const color = book.color.toLowerCase();
+        const colorBonus = weights.colors.some(c => c.toLowerCase() === color) ? 0.1 : 0;
+
+        // Итоговый шанс успеха с рандомом
+        const randomFactor = Math.random() * 0.2; // 0..0.2 случайный разброс
+
+        let successProbability = baseScore + colorBonus + randomFactor;
+
+        // Ограничиваем максимум 1
+        return Math.min(successProbability, 1);
+    }
+    function showPublishResult(profit) {
+        // Создаем оверлей
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.zIndex = 1100;
+
+        // Создаем модальное окно
+        const modal = document.createElement('div');
+        modal.style.backgroundColor = '#2c2c3e';
+        modal.style.color = '#fff';
+        modal.style.padding = '30px';
+        modal.style.borderRadius = '12px';
+        modal.style.width = '300px';
+        modal.style.textAlign = 'center';
+        modal.style.boxShadow = '0 0 15px rgba(0,0,0,0.8)';
+        modal.style.fontSize = '18px';
+
+        modal.innerHTML = `
+    <p>Вы выпустили тираж книги!</p>
+    <p><strong>Прибыль: ${profit} ₽</strong></p>
+    <p>${profit >= 0 ? 'Поздравляем, вы в плюсе!' : 'К сожалению, вы ушли в минус.'}</p>
+    <button id="closeModalBtn" style="margin-top:20px; padding:8px 16px; border:none; border-radius:8px; background:#4caf50; color:#fff; cursor:pointer; font-weight:600;">Закрыть</button>
+  `;
+
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+
+        // Закрытие окна
+        modal.querySelector('#closeModalBtn').onclick = () => {
+            document.body.removeChild(overlay);
+        };
+
+    }
+    function calculateProfit(book, successProb) {
+        const cost = book.pages * 5;
+        const successRoll = Math.random();
+
+        let bookProfit;
+        if (successRoll <= successProb) {
+            // Прибыль при успехе
+            bookProfit = Math.round(book.pages * (1 + successProb) * 10) - cost;
+            return bookProfit;
+        } else {
+            // Потеря — рандом от 10% до 90% стоимости выпуска
+            const lossPercent = 0.1 + Math.random() * 0.8;
+            bookProfit = -Math.round(cost * lossPercent);
+            return bookProfit;
+        }
+    }
+
+    document.getElementById('current-money').textContent = `${stats.money.toLocaleString()} ₽`;
+    function publishBook(index) {
+        const book = books[index];
+        const cost = book.pages * 5;
+
+        let stats = loadStats(); // загружаем актуальные stats
+
+        if (stats.money < cost) {
+            alert('Недостаточно денег для выпуска тиража.');
+            return;
+        }
+
+        const successProb = getSuccessProbability(book);
+        const profit = calculateProfit(book, successProb);
+        if(profit >= 0){
+            stats.money -= cost;
+        }
+        stats.money += profit; // добавляем прибыль или убыток
+        saveStats(stats);
+        updateUI(stats);
+        book.published = true;
+        book.successProb = successProb;
+        book.profit = profit;
+        stats.sales += Math.round(100 * Math.random()) * stats.level
+        stats.fans += Math.max(0, Math.round(profit / 100))
+        stats.reputation += Math.max(0, Math.round(profit * 0.4));
+        stats.exp += parseInt(book.pages)
+        stats.level = Math.round(stats.exp / 100)
+        saveStats(stats)
+        console.log(localStorage.getItem('characterStats'))
+        books[index] = book;
+        localStorage.setItem('books', JSON.stringify(books));
+        showPublishResult(profit);
+
+
+        document.getElementById('current-money').textContent = `${stats.money.toLocaleString()} ₽`;
+    }
+
+</script>
+</html>

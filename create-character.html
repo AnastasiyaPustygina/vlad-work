@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writer Simulator 2 - Создание персонажа</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/create-character.css">
+</head>
+<body>
+<div class="character-creation">
+    <h1><i class="fas fa-user-edit"></i> Создание персонажа</h1>
+
+    <div class="creation-container">
+        <div class="character-preview">
+            <div class="character-image-container">
+                <div class="placeholder-text">
+                    <i class="fas fa-user-circle" style="font-size: 3rem; margin-bottom: 10px; color: #ccc;"></i>
+                    <p>Здесь появится ваш персонаж</p>
+                </div>
+                <img id="character-image" alt="Ваш персонаж">
+                <div class="loading-spinner" id="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Генерация персонажа...</p>
+                </div>
+            </div>
+
+            <div id="character-info" class="character-info">
+                <div class="info-block">
+                    <h3><i class="fas fa-info-circle"></i> Характеристики</h3>
+                    <p><strong>Имя:</strong> <span id="char-name">Не указано</span></p>
+                    <p><strong>Возраст:</strong> <span id="char-age">16</span> лет</p>
+                    <p><strong>Профессия:</strong> <span id="char-job">-</span></p>
+                    <p><strong>Образование:</strong> <span id="char-education">-</span></p>
+                    <p><strong>Место жительства:</strong> <span id="char-living">-</span></p>
+                    <p><strong>Транспорт:</strong> <span id="char-transport">-</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="character-customization">
+            <div class="customization-section">
+                <h3><i class="fas fa-sliders-h"></i> Основные параметры</h3>
+                <div class="form-group">
+                    <label for="name-input"><i class="fas fa-signature"></i> Имя персонажа:</label>
+                    <input type="text" id="name-input" placeholder="Введите имя">
+                </div>
+
+                <div class="form-group">
+                    <label for="age-input"><i class="fas fa-birthday-cake"></i> Возраст: <span id="age-value">16</span> лет</label>
+                    <input type="range" id="age-input" min="16" max="70" value="16">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-venus-mars"></i> Пол:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender" value="male" checked> <i class="fas fa-male"></i> Мужской</label>
+                        <label><input type="radio" name="gender" value="female"> <i class="fas fa-female"></i> Женский</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="customization-section">
+                <h3><i class="fas fa-palette"></i> Внешность</h3>
+                <div class="form-group">
+                    <label for="ethnicity"><i class="fas fa-globe-americas"></i> Этническая принадлежность:</label>
+                    <select id="ethnicity">
+                        <option value="FFDBAC">Европеоидная</option>
+                        <option value="F1C27D">Азиатская</option>
+                        <option value="8D5524">Африканская</option>
+                        <option value="D2B48C">Латиноамериканская</option>
+                        <option value="A78B6E">Ближневосточная</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hair-style"><i class="fas fa-cut"></i> Прическа:</label>
+                    <select id="hair-style">
+                        <option value="short">Короткая</option>
+                        <option value="medium">Средняя (мужская)</option>
+                        <option value="long">Длинная</option>
+                        <option value="none">Лысый/бритая</option>
+                        <option value="curly">Кудри (вместо дредов)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hair-color"><i class="fas fa-fill-drip"></i> Цвет волос:</label>
+                    <select id="hair-color">
+                        <option value="E6BE8A">Блондин</option>
+                        <option value="F5D5A0">Пшеничный блондин</option>
+                        <option value="D2B48C">Пепельный блондин</option>
+                        <option value="8B4513">Тёмно-каштановый</option>
+                        <option value="5C4033">Шоколадный</option>
+                        <option value="3D2B1F">Глубокий коричневый</option>
+                        <option value="000000">Чёрный</option>
+                        <option value="2C2222">Сине-чёрный</option>
+                        <option value="B22222">Ярко-рыжий</option>
+                        <option value="A52A2A">Красное дерево</option>
+                        <option value="834D1E">Медный</option>
+                        <option value="C1876B">Светло-рыжий</option>
+                        <option value="DCD0C0">Платиновый блондин</option>
+                        <option value="E6CEA8">Золотистый блондин</option>
+                        <option value="A55728">Тёмно-рыжий</option>
+                        <option value="59260B">Коричнево-бордовый</option>
+                        <option value="B55239">Терракотовый</option>
+                        <option value="6A4E35">Ореховый</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="customization-section">
+                <h3><i class="fas fa-tshirt"></i> Стиль</h3>
+
+                <div class="form-group">
+                    <label for="glasses"><i class="fas fa-glasses"></i> Очки:</label>
+                    <select id="glasses">
+                        <option value="none">Нет</option>
+                        <option value="variant02">Обычные</option>
+                        <option value="variant01">Солнцезащитные</option>
+                        <option value="variant04">Круглые</option>
+                        <option value="variant05">Авиаторы</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button id="randomize-btn">
+                    <i class="fas fa-random"></i> Случайный
+                </button>
+                <button id="generate-btn" >
+                    <i class="fas fa-magic"></i> Создать
+                </button>
+                <button id="start-game-btn">
+                    <i class="fas fa-gamepad"></i> Продолжить
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/create-character.js">
+</script>
+</body>
+</html>

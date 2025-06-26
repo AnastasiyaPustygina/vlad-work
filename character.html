@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Ваш уникальный персонаж</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/profile.css">
+
+</head>
+<body>
+<div class="particles" id="particles-js"></div>
+
+<!-- Верхняя панель навигации -->
+<div class="top-nav">
+  <a href="#" class="nav-item active" id="nav-profile">
+    <i class="fas fa-user"></i>
+    <span>Профиль</span>
+  </a>
+  <a href="finance.html" class="nav-item" id="nav-finance">
+    <i class="fas fa-coins"></i>
+    <span>Финансы</span>
+  </a>
+  <a href="books.html" class="nav-item" id="nav-books">
+    <i class="fas fa-book"></i>
+    <span>Книги</span>
+  </a>
+  <a href="character-upgrade.html" class="nav-item" id="nav-stats">
+    <i class="fas fa-chart-line"></i>
+    <span>Характеристики</span>
+  </a>
+  <a href="#" class="nav-item" id="nav-life">
+    <i class="fas fa-heart"></i>
+    <span>Жизнь</span>
+  </a>
+</div>
+
+<div class="container">
+  <header>
+    <h1>Ваш персонаж</h1>
+  </header>
+
+  <main>
+    <div class="character-card">
+      <div class="character-content">
+        <div class="character-image">
+          <img id="char-image" alt="Аватар персонажа">
+        </div>
+
+        <div class="character-details" id="character-details">
+          <div class="detail-item">
+            <h3 data-i18n="name" >Имя</h3>
+            <p id="char-name"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="age" >Возраст</h3>
+            <p id="char-age"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="gender">Пол</h3>
+            <p id="char-gender"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="job" >Профессия</h3>
+            <p id="char-job"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="education">Образование</h3>
+            <p id="char-education"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="living" >Жильё</h3>
+            <p id="char-living"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="transport" >Транспорт</h3>
+            <p id="char-transport"></p>
+          </div>
+        </div>
+
+        <div class="stats-container" id="stats-container">
+          <div class="detail-item">
+            <h3 data-i18n="level">Уровень</h3>
+            <p id="stat-level"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="fans" >Фанаты</h3>
+            <p id="stat-fans"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="contracts">Контракты</h3>
+            <p id="stat-contracts"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3 data-i18n="transport" >Продажи</h3>
+            <p id="stat-sales"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3>Книги</h3>
+            <p id="stat-books"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3>Доход</h3>
+            <p id="stat-income"></p>
+          </div>
+
+          <div class="detail-item">
+            <h3>Опыт</h3>
+            <p id="stat-exp"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="btn-character">Персонаж</button>
+        <button class="btn " id="btn-stats">Статистика</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2024 Writer Simulator 2</p>
+  </footer>
+</div>
+
+<!-- Нижняя панель навигации -->
+<div class="bottom-nav">
+  <div class="bottom-item">
+    <i class="fas fa-calendar-week"></i>
+    <span id="current-week">Неделя 1</span>
+  </div>
+  <div class="bottom-item">
+    <i class="fas fa-clock"></i>
+    <span id="game-time">День 1, 08:00</span>
+  </div>
+  <div class="bottom-item">
+    <i class="fas fa-wallet"></i>
+    <span class="money-display" id="current-money">0 ₽</span>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+  loadStats()
+  // Инициализация частиц
+
+  const translations = {
+    ru: {
+      profile: "Профиль",
+      finance: "Финансы",
+      books: "Книги",
+      stats: "Характеристики",
+      life: "Жизнь",
+      level: "Уровень",
+      fans: "Фанаты",
+      contracts: "Контракты",
+      sales: "Продажи",
+      writtenBooks: "Книги",
+      income: "Доход",
+      exp: "Опыт",
+      characterNotFound: "Персонаж не найден",
+      createCharacter: "Создать персонажа",
+      pleaseCreate: "Пожалуйста, создайте персонажа сначала",
+      yourCharacter: "Ваш персонаж",
+      character: "Персонаж",
+      statistics: "Статистика",
+      week: "Неделя",
+      day: "День"
+    },
+    en: {
+      profile: "Profile",
+      finance: "Finance",
+      books: "Books",
+      stats: "Stats",
+      life: "Life",
+      level: "Level",
+      fans: "Fans",
+      contracts: "Contracts",
+      sales: "Sales",
+      writtenBooks: "Books",
+      income: "Income",
+      exp: "XP",
+      characterNotFound: "Character not found",
+      createCharacter: "Create Character",
+      pleaseCreate: "Please create a character first",
+      yourCharacter: "Your Character",
+      character: "Character",
+      statistics: "Statistics",
+      week: "Week",
+      day: "Day"
+    }
+  };
+  const lang = localStorage.getItem('language') || 'ru';
+  const t = translations[lang];
+  document.querySelector("h1").textContent = t.yourCharacter;
+  document.getElementById("btn-character").textContent = t.character;
+  document.getElementById("btn-stats").textContent = t.statistics;
+
+  document.getElementById("nav-profile").querySelector("span").textContent = t.profile;
+  document.getElementById("nav-finance").querySelector("span").textContent = t.finance;
+  document.getElementById("nav-books").querySelector("span").textContent = t.books;
+  document.getElementById("nav-stats").querySelector("span").textContent = t.stats;
+  document.getElementById("nav-life").querySelector("span").textContent = t.life;
+
+
+  particlesJS("particles-js", {
+    "particles": {
+      "number": {
+        "value": 60,
+        "density": {
+          "enable": true,
+          "value_area": 600
+        }
+      },
+      "color": {
+        "value": "#d4af37"
+      },
+      "shape": {
+        "type": "circle",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        }
+      },
+      "opacity": {
+        "value": 0.4,
+        "random": true,
+        "anim": {
+          "enable": true,
+          "speed": 1,
+          "opacity_min": 0.1,
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 2.5,
+        "random": true
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 120,
+        "color": "#d4af37",
+        "opacity": 0.2,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 1.5,
+        "direction": "none",
+        "random": true,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false,
+        "attract": {
+          "enable": true,
+          "rotateX": 500,
+          "rotateY": 1000
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "grab"
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"
+        },
+        "resize": true
+      },
+      "modes": {
+        "grab": {
+          "distance": 120,
+          "line_linked": {
+            "opacity": 0.8
+          }
+        },
+        "push": {
+          "particles_nb": 3
+        }
+      }
+    },
+    "retina_detect": true
+  });
+
+  // Учебные материалы
+  const tutorials = [
+    {
+      "title": "Работа",
+      "text": "Работа - основной вид заработка на первое время. Чем выше ваша должность и чем лучше вы работаете, тем больше вы получите денег.\n"
+    }, {
+      "title": "Подработка",
+      "text": "Если вам не хватает денег, то вы можете подработать выполнением разных заданий. Например, просмотром рекламы."
+    },{
+      "title": "Написание книг",
+      "text": "Чем больше вы пишите книг, тем лучше у вас это получается. Не переживайте, если первое время книги будут плохими."
+    }, {
+      "title": "Контакты",
+      "text": "Чтобы заработать дополнительные деньги на выпуске книг - нужно взять контракт и выполнить все его условия."
+    },{
+      "title": "Отношения",
+      "text": "Вы можете завести отношения, семью и детей. От этого вы получите разные приятные бонусы. Также можете завести питомцев"
+    },{
+      "title": "Случайные события",
+      "text": "Во время игры с вами могут случиться разные события. Чем больше вы играете, тем больше таких событий. Они могут быть как хорошими, так и плохими."
+    },{
+      "title": "Время",
+      "text": "В игре есть виртуальное время. Когда вы находитесь в каком-либо разделе (например, пишете книгу), то оно останавливается"
+    },{
+      "title": "Завершение недели",
+      "text": "При желании вы можете экстренно завершить неделю, нажав на таймер снизу"
+    },{
+      "title": "Сохранение игры",
+      "text": "Сохранение игры происходит только по завершеию недели. Так что будьте внимательны"
+    },{
+      "title": "Завершение",
+      "text": "Вы узнали самое важное, с остальным вы должны будете разобраться сами в процессе игры) Удачи!"
+    }
+  ];
+
+
+  // Функция для сохранения статистики в localStorage
+  function saveStats(stats) {
+    localStorage.setItem('characterStats', JSON.stringify(stats));
+  }
+
+  // Функция для загрузки статистики из localStorage
+  function loadStats() {
+    const defaultStats = {
+      level: 1,
+      fans: 0,
+      contracts: 0,
+      sales: 0,
+      books: 0,
+      income: 0,
+      reputation: 0,
+      exp: 0,
+      money: 0,
+      week: 1,
+      day: 1,
+      hour: 0,
+      minute: 0
+    };
+
+    const savedStats = localStorage.getItem('characterStats');
+    return savedStats ? JSON.parse(savedStats) : defaultStats;
+  }
+
+  // Функция для обновления статистики
+  function updateStats(newStats) {
+    const currentStats = loadStats();
+    const updatedStats = {...currentStats, ...newStats};
+    saveStats(updatedStats);
+    updateUI(updatedStats);
+    return updatedStats;
+  }
+
+  // Функция для обновления интерфейса
+  function updateUI(stats) {
+    let bookCount = JSON.parse(localStorage.getItem('books')).length;
+
+    let businessIncome = Array.isArray(stats.businesses)
+            ? stats.businesses.map(b => b.income || 0).reduce((a, b) => a + b, 0)
+            : 0;
+
+    let income = (stats.income || 0) + businessIncome;
+    // Обновляем статистику персонажа
+    document.getElementById('stat-level').textContent = `${stats.level} ${t.level}`;
+    document.getElementById('stat-fans').textContent = `${stats.fans} ${lang === 'ru' ? 'чел' : 'people'}`;
+    document.getElementById('stat-contracts').textContent = `${stats.contracts} ${t.contracts}`;
+    document.getElementById('stat-sales').textContent = `${stats.sales} ${t.sales}`;
+    document.getElementById('stat-books').textContent = `${bookCount} ${t.writtenBooks}`;
+    document.getElementById('stat-income').textContent = `${income} ₽`;
+    document.getElementById('stat-exp').textContent = `${stats.exp} ${t.exp}`;
+
+  }
+  function updateBottom(stats){
+    document.getElementById('current-week').textContent = `${t.week} ${stats.week}`;
+    document.getElementById('game-time').textContent = `${t.day} ${stats.day}, ${String(stats.hour).padStart(2, '0')}:${String(stats.minute).padStart(2, '0')}`;
+    document.getElementById('current-money').textContent = `${stats.money.toLocaleString()} ₽`;
+  }
+  // Функция для переключения между вкладками
+  function showTab(tab) {
+    const charDetails = document.getElementById('character-details');
+    const statsContainer = document.getElementById('stats-container');
+    const btnCharacter = document.getElementById('btn-character');
+    const btnStats = document.getElementById('btn-stats');
+
+    if (tab === 'character') {
+      charDetails.style.display = 'grid';
+      statsContainer.style.display = 'none';
+      btnCharacter.classList.add('active');
+      btnCharacter.classList.add('btn-primary');
+      btnStats.classList.remove('active');
+      btnStats.classList.remove('btn-primary');
+    } else {
+      charDetails.style.display = 'none';
+      statsContainer.style.display = 'grid';
+      btnStats.classList.add('active');
+      btnStats.classList.add('btn-primary');
+      btnCharacter.classList.remove('active');
+      btnCharacter.classList.remove('btn-primary');
+    }
+  }
+
+  // Функция для переключения между разделами
+  function showSection(section) {
+    // Снимаем активность со всех кнопок
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.classList.remove('active');
+    });
+
+    // Активируем текущую кнопку
+    document.getElementById(`nav-${section}`).classList.add('active');
+
+    // Здесь будет логика отображения разных разделов
+    // Пока просто показываем сообщение в консоли
+    console.log(`Переключено на раздел: ${section}`);
+
+
+  }
+
+  // Инициализация игрового времени
+  function initGameTime() {
+    let stats = loadStats();
+
+    // Обновляем время каждую секунду (5 секунд = 1 час игры)
+    setInterval(() => {
+      stats.minute += 12; // 5 секунд = 1 час (60 минут / 5 = 12 минут за секунду)
+
+      if (stats.minute >= 60) {
+        stats.minute = 0;
+        stats.hour++;
+      }
+
+      if (stats.hour >= 24) {
+        stats.hour = 0;
+        stats.day++;
+      }
+
+      if (stats.day > 7) {
+        stats.day = 1;
+        stats.week++;
+        // Сохраняем игру при завершении недели
+        saveStats(stats);
+      }
+
+      updateBottom(stats);
+    }, 1000); // Обновляем каждую секунду
+  }
+
+  // Загрузка данных при открытии страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    const data = JSON.parse(localStorage.getItem('characterData'));
+    const stats = loadStats();
+
+    // Обработчики событий для кнопок
+    document.getElementById('btn-character').addEventListener('click', () => showTab('character'));
+    document.getElementById('btn-stats').addEventListener('click', () => showTab('stats'));
+
+    // Обработчики событий для верхней навигации
+    document.getElementById('nav-profile').addEventListener('click', (e) => {
+      e.preventDefault();
+      showSection('profile');
+    });
+    document.getElementById('nav-finance').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href="finance.html";
+    });
+    document.getElementById('nav-books').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href="books.html";
+    });
+    document.getElementById('nav-stats').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href="character-upgrade.html";
+    });
+    document.getElementById('nav-life').addEventListener('click', (e) => {
+      e.preventDefault();
+      showSection('life');
+    });
+
+    // Заполнение информации о персонаже
+    if (data) {
+      document.getElementById('char-name').textContent = data.name || 'Не указано';
+      document.getElementById('char-age').textContent = data.age ? `${data.age} лет` : 'Не указан';
+
+      const genderMap = {
+        'male': 'Мужской',
+        'female': 'Женский'
+      };
+      document.getElementById('char-gender').textContent = genderMap[data.gender] || 'Не указан';
+
+      document.getElementById('char-job').textContent = data.job || 'Не указана';
+      document.getElementById('char-education').textContent = data.education || 'Не указано';
+      document.getElementById('char-living').textContent = data.living || 'Не указано';
+      document.getElementById('char-transport').textContent = data.transport || 'Не указан';
+
+      if (data.image) {
+        document.getElementById('char-image').src = data.image;
+      } else {
+        document.getElementById('char-image').src = 'https://via.placeholder.com/250x350?text=Нет+изображения';
+      }
+
+      // Отображаем статистику
+      updateUI(stats);
+    } else {
+      document.querySelector('.character-card').innerHTML = `
+          <div style="text-align: center; padding: 1rem; width: 100%;">
+            <h3 style="color: var(--gold); margin-bottom: 1rem;">Персонаж не найден</h3>
+            <p style="margin-bottom: 1.5rem;">Пожалуйста, создайте персонажа сначала</p>
+            <button class="btn btn-primary" onclick="window.location.href='create-character.html'">Создать персонажа</button>
+          </div>
+        `;
+    }
+
+    // По умолчанию показываем информацию о персонаже
+    showTab('character');
+
+    // Инициализируем игровое время
+    initGameTime();
+  });
+
+  // Пример использования функций для обновления статистики
+  /*
+  // Увеличиваем количество денег на 1000
+  updateStats({ money: loadStats().money + 1000 });
+
+  // Добавляем 1 написанную книгу
+  updateStats({ books: loadStats().books + 1 });
+
+  // Увеличиваем опыт на 50
+  updateStats({ exp: loadStats().exp + 50 });
+  */
+
+</script>
+</body>
+</html>

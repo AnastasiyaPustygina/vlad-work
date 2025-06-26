@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writer Simulator 2</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="main-menu">
+    <video autoplay muted loop id="bg-video">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-books-on-a-wooden-shelf-3983-large.mp4" type="video/mp4">
+    </video>
+
+    <div class="content">
+        <h1 class="title" data-key="title">WRITER SIMULATOR <span>2</span></h1>
+
+        <div class="buttons">
+            <button id="continue-btn" class="btn" data-key="continue">Продолжить</button>
+            <button id="new-game-btn" onclick="goToNewGame()" class="btn" data-key="newGame">Новая игра</button>
+            <button id="language-btn" class="btn" data-key="language">English</button>
+            <button id="about-btn" class="btn" data-key="about">Об игре</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="https://vk.com/writersimulator" target="_blank" class="vk-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg" alt="VK">
+        </a>
+        <span class="version">v2.1.0</span>
+        <button id="sound-btn" class="sound-btn">🔊</button>
+    </div>
+
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 data-key="aboutTitle">Об игре</h2>
+            <div id="about-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

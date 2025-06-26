@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writer Simulator 2</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/game-screen.css">
+</head>
+<body>
+<div class="game-container">
+  <!-- Верхняя панель навигации -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="character">
+      <img src="images/character-icon.png" alt="Персонаж">
+    </button>
+    <button class="tab-btn" data-tab="finance">
+      <img src="images/finance-icon.png" alt="Финансы">
+    </button>
+    <button class="tab-btn" data-tab="writing">
+      <img src="images/writing-icon.png" alt="Написание">
+    </button>
+    <button class="tab-btn" data-tab="stats">
+      <img src="images/stats-icon.png" alt="Характеристики">
+    </button>
+    <button class="tab-btn" data-tab="life">
+      <img src="images/life-icon.png" alt="Жизнь">
+    </button>
+  </div>
+
+  <!-- Основное содержимое -->
+  <div class="tab-content" id="character-tab">
+    <!-- Контент вкладки персонажа -->
+    <div class="character-info">
+      <h2>Информация о персонаже</h2>
+      <div class="info-grid">
+        <div>Имя: <span id="char-name">Даниил</span></div>
+        <div>Возраст: <span id="char-age">16</span> лет</div>
+        <div>Профессия: <span id="char-job">уборщик</span></div>
+        <div>Образование: <span id="char-education">не имеется</span></div>
+        <div>Жилье: <span id="char-housing">у родителей</span></div>
+        <div>Транспорт: <span id="char-transport">не имеется</span></div>
+      </div>
+    </div>
+
+    <div class="character-stats">
+      <h2>Статистика</h2>
+      <div class="stats-grid">
+        <div>Уровень: <span id="char-level">1</span></div>
+        <div>Фанатов: <span id="char-fans">0</span></div>
+        <div>Контрактов: <span id="char-contracts">0</span></div>
+        <div>Продано копий: <span id="char-sales">0</span></div>
+        <div>Написано книг: <span id="char-books">0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content hidden" id="finance-tab">
+    <!-- Контент вкладки финансов -->
+    <div class="finance-section">
+      <h3>Работа</h3>
+      <div class="job-info">
+        <p>Текущая работа: <span id="current-job">Уборщик</span></p>
+        <p>Зарплата: $<span id="job-salary">100</span> в неделю</p>
+        <button id="work-btn">Работать</button>
+      </div>
+    </div>
+
+    <div class="finance-section">
+      <h3>Подработка</h3>
+      <div class="side-jobs">
+        <button id="watch-ad-btn">Просмотреть рекламу (+$10)</button>
+        <button id="leave-review-btn">Оставить отзыв (+$20)</button>
+        <button id="join-vk-btn">Подписаться на группу ВК (+$15)</button>
+      </div>
+    </div>
+
+    <div class="finance-section">
+      <h3>Бизнес</h3>
+      <div class="business-options">
+        <button class="business-btn" data-cost="1000">Интернет-магазин ($1000)</button>
+        <button class="business-btn" data-cost="5000">Книжная лавка ($5000)</button>
+        <button class="business-btn" data-cost="20000">Малое издательство ($20000)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Продолжение game-screen.html -->
+
+  <div class="tab-content hidden" id="writing-tab">
+    <div class="writing-container">
+      <h2>Написание книги</h2>
+
+      <div class="book-creation">
+        <div class="form-group">
+          <label for="book-title">Название книги:</label>
+          <input type="text" id="book-title" placeholder="Введите название">
+        </div>
+
+        <div class="form-group">
+          <label for="book-genre">Жанр:</label>
+          <select id="book-genre">
+            <option value="detective">Детектив</option>
+            <option value="fantasy">Фэнтези</option>
+            <option value="scifi">Фантастика</option>
+            <option value="romance">Роман</option>
+            <option value="horror">Мистика</option>
+            <option value="adventure">Приключения</option>
+            <option value="comics">Комиксы</option>
+            <option value="children">Детское</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="book-pages">Количество страниц:</label>
+          <input type="range" id="book-pages" min="50" max="400" step="50" value="100">
+          <span id="pages-value">100</span>
+        </div>
+
+        <div class="points-distribution">
+          <h3>Распределение очков (10 доступно)</h3>
+          <div class="point-control">
+            <label for="plot-points">Сюжет:</label>
+            <input type="number" id="plot-points" min="0" max="10" value="0" class="point-input">
+          </div>
+          <div class="point-control">
+            <label for="world-points">Описание мира:</label>
+            <input type="number" id="world-points" min="0" max="10" value="0" class="point-input">
+          </div>
+          <div class="point-control">
+            <label for="romance-points">Любовная линия:</label>
+            <input type="number" id="romance-points" min="0" max="10" value="0" class="point-input">
+          </div>
+          <div class="point-control">
+            <label for="art-points">Иллюстрации:</label>
+            <input type="number" id="art-points" min="0" max="10" value="0" class="point-input">
+          </div>
+          <div class="points-remaining">Осталось очков: <span id="remaining-points">10</span></div>
+        </div>
+
+        <div class="cover-selection">
+          <h3>Выбор обложки</h3>
+          <div class="cover-options">
+            <div class="cover-option" data-color="red">
+              <div class="cover-preview red"></div>
+              <span>Красная</span>
+            </div>
+            <div class="cover-option" data-color="green">
+              <div class="cover-preview green"></div>
+              <span>Зеленая</span>
+            </div>
+            <div class="cover-option" data-color="pink">
+              <div class="cover-preview pink"></div>
+              <span>Розовая</span>
+            </div>
+          </div>
+          <div class="illustration-options hidden">
+            <!-- Динамически загружаемые варианты иллюстраций -->
+          </div>
+        </div>
+
+        <button id="start-writing-btn" class="action-btn">Начать писать</button>
+      </div>
+
+      <div class="writing-progress hidden">
+        <h3>Прогресс написания: <span id="writing-progress">0</span>%</h3>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="time-remaining">Осталось недель: <span id="weeks-remaining">4</span></div>
+        <button id="speed-up-btn" class="small-btn">Ускорить за $100</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content hidden" id="stats-tab">
+    <div class="stats-container">
+      <div class="stats-tabs">
+        <button class="stats-tab-btn active" data-tab="education">Образование</button>
+        <button class="stats-tab-btn" data-tab="upgrades">Улучшения</button>
+        <button class="stats-tab-btn" data-tab="property">Имущество</button>
+        <button class="stats-tab-btn" data-tab="promotion">Продвижение</button>
+      </div>
+
+      <div class="stats-content active" id="education-tab">
+        <h3>Образование</h3>
+        <div class="education-options">
+          <div class="education-option" data-type="school">
+            <h4>Училище</h4>
+            <p>Стоимость: $500</p>
+            <p>Длительность: 4 недели</p>
+            <p>Успеваемость: <span class="performance">0%</span></p>
+            <button class="study-btn">Поступить</button>
+          </div>
+          <!-- Другие варианты образования -->
+        </div>
+
+        <div class="exam-section hidden">
+          <h4>Экзамен</h4>
+          <div class="exam-question">
+            <p class="question-text">Кто написал "Войну и мир"?</p>
+            <div class="exam-answers">
+              <button class="answer-btn">А. Пушкин</button>
+              <button class="answer-btn">Б. Толстой</button>
+              <button class="answer-btn">В. Достоевский</button>
+            </div>
+          </div>
+          <div class="exam-progress">
+            Вопрос <span class="current-question">1</span> из <span class="total-questions">4</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-content" id="upgrades-tab">
+        <h3>Улучшения</h3>
+        <div class="upgrades-grid">
+          <div class="upgrade-item" data-upgrade="writing-speed">
+            <h4>Скорость написания</h4>
+            <p>Уменьшает время написания книг на 10%</p>
+            <p>Уровень: <span class="upgrade-level">0</span>/5</p>
+            <p>Стоимость: $<span class="upgrade-cost">200</span></p>
+            <button class="upgrade-btn">Купить</button>
+          </div>
+          <!-- Другие улучшения -->
+        </div>
+      </div>
+
+      <div class="stats-content" id="property-tab">
+        <h3>Имущество</h3>
+        <div class="property-tabs">
+          <button class="property-tab-btn active" data-type="real-estate">Недвижимость</button>
+          <button class="property-tab-btn" data-type="transport">Транспорт</button>
+        </div>
+
+        <div class="property-list real-estate">
+          <div class="property-item" data-property="dorm">
+            <h4>Комната в общежитии</h4>
+            <p>Стоимость: $5,000</p>
+            <p>Престиж: +5</p>
+            <button class="buy-btn">Купить</button>
+          </div>
+          <!-- Другие варианты недвижимости -->
+        </div>
+
+        <div class="property-list transport hidden">
+          <div class="property-item" data-property="scooter">
+            <h4>Скутер</h4>
+            <p>Стоимость: $1,200</p>
+            <p>Престиж: +2</p>
+            <button class="buy-btn">Купить</button>
+          </div>
+          <!-- Другие варианты транспорта -->
+        </div>
+      </div>
+
+      <div class="stats-content" id="promotion-tab">
+        <h3>Продвижение</h3>
+        <div class="promotion-options">
+          <div class="promotion-item" data-type="website">
+            <h4>Реклама на сайте</h4>
+            <p>Стоимость: $300</p>
+            <p>Эффективность: +15% продаж</p>
+            <p>Длительность: 2 недели</p>
+            <button class="promote-btn">Заказать</button>
+          </div>
+          <!-- Другие варианты продвижения -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content hidden" id="life-tab">
+    <div class="life-container">
+      <div class="life-tabs">
+        <button class="life-tab-btn active" data-tab="relationships">Отношения</button>
+        <button class="life-tab-btn" data-tab="pets">Питомцы</button>
+        <button class="life-tab-btn" data-tab="my-books">Мои книги</button>
+        <button class="life-tab-btn" data-tab="achievements">Награды</button>
+      </div>
+
+      <div class="life-content active" id="relationships-tab">
+        <div class="relationship-status">
+          <h3>Статус отношений</h3>
+          <p id="relationship-desc">У вас нет партнера</p>
+          <button id="find-partner-btn" class="action-btn">Найти партнера</button>
+        </div>
+
+        <div class="partner-creation hidden">
+          <h4>Создание партнера</h4>
+          <div class="form-group">
+            <label for="partner-name">Имя:</label>
+            <input type="text" id="partner-name">
+          </div>
+          <div class="form-group">
+            <label for="partner-job">Профессия:</label>
+            <select id="partner-job">
+              <option value="teacher">Учитель</option>
+              <option value="doctor">Врач</option>
+              <option value="artist">Художник</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Внешность:</label>
+            <div class="appearance-options">
+              <!-- Варианты внешности -->
+            </div>
+          </div>
+          <button id="create-partner-btn" class="action-btn">Создать</button>
+        </div>
+
+        <div class="relationship-management hidden">
+          <h4>Управление отношениями</h4>
+          <div class="relationship-meter">
+            <div class="meter-fill" style="width: 0%"></div>
+          </div>
+          <p>Уровень отношений: <span id="relationship-level">0</span>/100</p>
+          <button id="improve-relationship-btn" class="small-btn">Улучшить отношения ($50)</button>
+        </div>
+      </div>
+
+      <div class="life-content" id="pets-tab">
+        <h3>Питомцы</h3>
+        <div class="pets-status">
+          <p id="pet-desc">У вас нет питомца</p>
+          <button id="get-pet-btn" class="action-btn">Завести питомца</button>
+        </div>
+
+        <div class="pet-selection hidden">
+          <h4>Выберите питомца</h4>
+          <div class="pet-options">
+            <div class="pet-option" data-type="cat">
+              <img src="images/pet-cat.png" alt="Кот">
+              <p>Кот ($200)</p>
+            </div>
+            <!-- Другие варианты питомцев -->
+          </div>
+        </div>
+
+        <div class="pet-care hidden">
+          <h4>Уход за питомцем</h4>
+          <div class="pet-stats">
+            <div class="pet-stat">
+              <label>Сытость:</label>
+              <div class="stat-bar">
+                <div class="stat-fill hunger"></div>
+              </div>
+            </div>
+            <div class="pet-stat">
+              <label>Радость:</label>
+              <div class="stat-bar">
+                <div class="stat-fill happiness"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pet-actions">
+            <button id="feed-pet-btn" class="small-btn">Покормить ($10)</button>
+            <button id="play-pet-btn" class="small-btn">Поиграть</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="life-content" id="my-books-tab">
+        <h3>Мои книги</h3>
+        <div class="books-list">
+          <!-- Динамически заполняемый список книг -->
+          <p class="empty-message">Вы еще не написали ни одной книги</p>
+        </div>
+      </div>
+
+      <div class="life-content" id="achievements-tab">
+        <h3>Награды</h3>
+        <div class="achievements-grid">
+          <div class="achievement locked">
+            <div class="achievement-icon"></div>
+            <h4>Первая книга</h4>
+            <p>Написать свою первую книгу</p>
+          </div>
+          <!-- Другие достижения -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Нижняя панель статуса -->
+  <div class="status-bar">
+    <div class="status-item">
+      <span class="status-label">Неделя:</span>
+      <span id="week-counter">1</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Время:</span>
+      <span id="time-display">08:00</span>
+    </div>
+    <div class="status-item money">
+      <span class="status-label">Деньги:</span>
+      <span id="money-amount">$0</span>
+    </div>
+  </div>
+</div>
+
+<script src="js/game.js"></script>
+<script src="js/finance.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/relationships.js"></script>
+</body>
+</html>

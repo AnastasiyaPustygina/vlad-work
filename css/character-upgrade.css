@@ -1,0 +1,274 @@
+/* Основные переменные и сброс */
+:root {
+    --gold: #d4af37;
+    --dark-gold: #b59530;
+    --bg-dark: #0a0a0a;
+    --bg-light: #1a1a1a;
+    --text-light: #f0f0f0;
+    --text-dark: #333;
+    --border-gold: rgba(212, 175, 55, 0.4);
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --green: #005500;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Навигация сверху */
+.top-nav {
+    background: rgba(26, 26, 26, 0.9);
+    border-bottom: 1px solid var(--border-gold);
+    padding: 0.6rem 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.top-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.top-nav .nav-item i {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+    color: inherit;
+}
+
+.top-nav .nav-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold);
+}
+
+.top-nav .nav-item.active {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold);
+}
+
+/* Основной контейнер */
+.container {
+    max-width: 700px;
+    margin: 2rem auto 4rem;
+    padding: 1rem 2rem;
+    background: var(--bg-light);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    border: 1px solid var(--border-gold);
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.container h1 {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--gold);
+    font-size: 2.2rem;
+    margin-bottom: 1.8rem;
+    text-align: center;
+    letter-spacing: 1.3px;
+}
+
+/* Информация о персонаже */
+.character-info {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+}
+
+.character-info img#characterImage {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+    margin-bottom: 1rem;
+    background: var(--bg-dark);
+}
+
+.character-info h2#characterName {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    color: var(--gold);
+}
+
+.character-info p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    color: var(--text-light);
+}
+
+/* Секция улучшений */
+.upgrade-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.upgrade-section label {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.03em;
+}
+
+/* Селекты */
+.upgrade-section select {
+    background: var(--input-bg);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23d4af37" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 16px 16px;
+}
+
+.upgrade-section select:hover,
+.upgrade-section select:focus {
+    border-color: var(--dark-gold);
+    outline: none;
+}
+
+/* Стоимость улучшений */
+#upgradeCost {
+    font-weight: 700;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    text-align: center;
+    min-height: 1.5em;
+    user-select: none;
+    margin-top: 1rem;
+}
+
+/* Кнопка сохранить */
+#saveUpgrades {
+    background-color: var(--gold);
+    border: none;
+    border-radius: 50px;
+    color: var(--text-dark);
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 0;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 1rem;
+}
+
+#saveUpgrades:hover {
+    background-color: var(--dark-gold);
+    box-shadow: 0 0 20px rgba(181, 149, 48, 0.8);
+}
+
+/* Нижняя навигация */
+.bottom-nav {
+    background: rgba(26, 26, 26, 0.9);
+    border-top: 1px solid var(--border-gold);
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.bottom-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--bg-dark);
+    font-size: 1rem;
+}
+select {
+    background-color: #222;
+    color: #eee;
+}
+
+select:focus {
+    background-color: #222;
+    color: #eee;
+}
+
+select option {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+.bottom-item i {
+    color: var(--gold);
+    font-size: 1.3rem;
+}
+
+/* Отображение денег */
+.money-display {
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 1.15rem;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+    .container {
+        margin: 1rem;
+        padding: 1.2rem;
+    }
+
+    .character-info img#characterImage {
+        width: 90px;
+        height: 90px;
+    }
+
+    .top-nav {
+        padding: 0.5rem 0.5rem;
+    }
+
+    .top-nav .nav-item span {
+        font-size: 0.75rem;
+    }
+}

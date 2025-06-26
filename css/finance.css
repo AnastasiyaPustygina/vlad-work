@@ -1,0 +1,422 @@
+:root {
+    --gold: #d4af37;
+    --dark-gold: #b59530;
+    --bg-dark: #0a0a0a;
+    --bg-light: #1a1a1a;
+    --text-light: #f0f0f0;
+    --text-dark: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+    position: relative;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(10,10,10,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    z-index: -2;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+}
+.typing-game {
+    background: rgba(40, 40, 40, 0.8);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.typing-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: var(--gold);
+}
+
+.typing-input {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--gold);
+    color: white;
+    border-radius: 4px;
+}
+
+.memory-game {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 1rem 0;
+}
+
+.memory-card {
+    width: 100%;
+    height: 80px;
+    background: var(--gold);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.memory-card.hidden {
+    background: white;
+    color: white;
+}
+
+.memory-card.matched {
+    background: #4CAF50;
+    cursor: default;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.top-nav {
+    background: rgba(26, 26, 26, 0.9);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.nav-item.active {
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.nav-item i {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.nav-item span {
+    font-size: 0.9rem;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    animation: fadeIn 1s ease-out;
+    flex: 1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.finance-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.finance-section {
+    background: rgba(26, 26, 26, 0.8);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+.section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.option-card {
+    background: rgba(40, 40, 40, 0.6);
+    border-radius: 8px;
+    padding: 1.2rem;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+}
+
+.option-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.option-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.8rem;
+}
+
+.option-reward {
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: 'Cinzel Decorative', serif;
+    background: var(--gold);
+    color: var(--text-dark);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.8rem;
+    width: 100%;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: var(--dark-gold);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Модальные окна для мини-игр */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    border: 2px solid var(--gold);
+    text-align: center;
+}
+
+.modal-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+
+.game-container {
+    margin: 1.5rem 0;
+}
+
+.click-game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.click-item {
+    width: 100%;
+    height: 80px;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.click-item:hover {
+    transform: scale(0.95);
+}
+
+.click-item.clicked {
+    background: var(--gold);
+}
+
+.timer-bar {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+.timer-progress {
+    height: 100%;
+    background: var(--gold);
+    width: 100%;
+    transition: width 0.1s linear;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.close-modal {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.business-level {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.3rem;
+}
+
+.contract-requirements {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed rgba(212, 175, 55, 0.3);
+}
+
+.requirement-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.requirement-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.requirement-value {
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.bottom-nav {
+    background: rgba(26, 26, 26, 0.9);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}
+
+.bottom-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+}
+
+.bottom-item i {
+    color: var(--gold);
+    font-size: 1.2rem;
+}
+
+.money-display {
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .nav-item span {
+        font-size: 0.8rem;
+    }
+
+    .nav-item i {
+        font-size: 1.2rem;
+    }
+}

@@ -1,0 +1,364 @@
+/* Основные стили игрового экрана */
+.game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.tab-btn img {
+    width: 40px;
+    height: 40px;
+}
+
+.tab-btn.active {
+    transform: translateY(-5px);
+    border-bottom: 3px solid #4a6fa5;
+}
+
+.tab-content {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 60px;
+}
+
+/* Стили для вкладки персонажа */
+.character-info, .character-stats {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.info-grid, .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Стили для вкладки финансов */
+.finance-section {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.side-jobs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.business-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.business-btn {
+    width: 100%;
+    padding: 15px 10px;
+}
+
+/* Стили для написания книг */
+.writing-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.book-creation {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#book-pages {
+    width: 80%;
+    margin-right: 10px;
+}
+
+.points-distribution {
+    background-color: #f0f7ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.point-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.point-control label {
+    width: 150px;
+}
+
+.point-input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+}
+
+.cover-options {
+    display: flex;
+    gap: 20px;
+    margin: 15px 0;
+}
+
+.cover-option {
+    text-align: center;
+    cursor: pointer;
+}
+
+.cover-preview {
+    width: 80px;
+    height: 120px;
+    border: 2px solid transparent;
+    margin-bottom: 5px;
+}
+
+.cover-preview.red { background-color: #ff6b6b; }
+.cover-preview.green { background-color: #6bff6b; }
+.cover-preview.pink { background-color: #ff6bff; }
+
+.cover-option.selected .cover-preview {
+    border-color: #4a6fa5;
+}
+
+.writing-progress {
+    background-color: #e6f7ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #eee;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #4a6fa5;
+    width: 0%;
+    transition: width 0.5s;
+}
+
+/* Стили для характеристик */
+.stats-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.stats-tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+}
+
+.stats-tab-btn.active {
+    border-bottom-color: #4a6fa5;
+    font-weight: bold;
+}
+
+.stats-content {
+    display: none;
+}
+
+.stats-content.active {
+    display: block;
+}
+
+.education-options, .property-list, .promotion-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.upgrades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.upgrade-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Стили для личной жизни */
+.life-tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.life-tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+}
+
+.life-tab-btn.active {
+    border-bottom-color: #4a6fa5;
+    font-weight: bold;
+}
+
+.life-content {
+    display: none;
+}
+
+.life-content.active {
+    display: block;
+}
+
+.relationship-meter, .stat-bar {
+    height: 20px;
+    background-color: #eee;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.meter-fill {
+    height: 100%;
+    background-color: #ff6bff;
+    width: 0%;
+}
+
+.pet-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.pet-option {
+    text-align: center;
+    cursor: pointer;
+}
+
+.pet-option img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.books-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.achievement {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    opacity: 0.5;
+}
+
+.achievement.unlocked {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(74, 111, 165, 0.5);
+}
+
+/* Нижняя панель статуса */
+.status-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #4a6fa5;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+}
+
+.status-label {
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.money {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .info-grid, .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        margin: 5px;
+    }
+}

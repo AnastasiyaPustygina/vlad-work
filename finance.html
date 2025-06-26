@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Финансы - Writer Simulator 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/finance.css">
+</head>
+<body>
+<div class="particles" id="particles-js"></div>
+
+<div class="top-nav">
+    <a href="character.html" class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>Профиль</span>
+    </a>
+    <a href="#" class="nav-item active">
+        <i class="fas fa-coins"></i>
+        <span>Финансы</span>
+    </a>
+    <a href="books.html" class="nav-item">
+        <i class="fas fa-book"></i>
+        <span>Книги</span>
+    </a>
+    <a href="character-upgrade.html" class="nav-item">
+        <i class="fas fa-chart-line"></i>
+        <span>Характеристики</span>
+    </a>
+    <a href="life.html" class="nav-item">
+        <i class="fas fa-heart"></i>
+        <span>Жизнь</span>
+    </a>
+</div>
+
+<div class="container">
+    <div class="finance-sections">
+        <!-- Раздел Работа -->
+        <div class="finance-section">
+            <h2 class="section-title">Работа</h2>
+            <div class="options-grid">
+                <div class="option-card" id="click-game-option">
+                    <h3 class="option-title"><i class="fas fa-mouse-pointer"></i> Кликер</h3>
+                    <p class="option-desc">Кликайте по белым квадратам за отведенное время. Чем больше кликов - тем больше заработок.</p>
+                    <p class="option-reward">Доход: 50-200 ₽ за задание</p>
+                    <button class="btn start-click-game">Начать работу</button>
+                </div>
+
+                <div class="option-card" id="typing-game-option">
+                    <h3 class="option-title"><i class="fas fa-keyboard"></i> Набор текста</h3>
+                    <p class="option-desc">Наберите текст как можно быстрее и без ошибок. Скорость и точность влияют на оплату.</p>
+                    <p class="option-reward">Доход: 80-250 ₽ за задание</p>
+                    <button class="btn start-typing-game">Начать работу</button>
+                </div>
+
+                <div class="option-card" id="memory-game-option">
+                    <h3 class="option-title"><i class="fas fa-brain"></i> Память</h3>
+                    <p class="option-desc">Запомните последовательность карточек и повторите её. Чем длиннее последовательность - тем выше оплата.</p>
+                    <p class="option-reward">Доход: 60-180 ₽ за задание</p>
+                    <button class="btn start-memory-game">Начать работу</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Раздел Подработка -->
+        <div class="finance-section">
+            <h2 class="section-title">Подработка</h2>
+            <div class="options-grid">
+                <div class="option-card" id="watch-ad">
+                    <h3 class="option-title"><i class="fas fa-ad"></i> Просмотр рекламы</h3>
+                    <p class="option-desc">Просмотрите рекламный ролик до конца и получите вознаграждение.</p>
+                    <p class="option-reward">Доход: 30 ₽ за просмотр</p>
+                    <button class="btn watch-ad-btn">Смотреть рекламу</button>
+                </div>
+
+                <div class="option-card" id="leave-review">
+                    <h3 class="option-title"><i class="fas fa-star"></i> Оставить отзыв</h3>
+                    <p class="option-desc">Оставьте отзыв о игре в Play Market и получите вознаграждение.</p>
+                    <p class="option-reward">Доход: 100 ₽ за отзыв</p>
+                    <button class="btn leave-review-btn">Оставить отзыв</button>
+                </div>
+
+                <div class="option-card" id="join-vk">
+                    <h3 class="option-title"><i class="fab fa-vk"></i> Подписаться на группу</h3>
+                    <p class="option-desc">Подпишитесь на нашу группу ВКонтакте и получите бонус.</p>
+                    <p class="option-reward">Доход: 50 ₽ за подписку</p>
+                    <button class="btn join-vk-btn">Перейти в ВК</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Раздел Бизнес -->
+        <div class="finance-section">
+            <h2 class="section-title">Бизнес</h2>
+            <div class="options-grid">
+                <div class="option-card" id="online-shop">
+                    <h3 class="option-title"><i class="fas fa-shopping-cart"></i> Интернет-магазин</h3>
+                    <p class="option-desc">Продавайте товары через интернет. Пассивный доход с небольшими вложениями.</p>
+                    <p class="option-reward">Доход: 200 ₽/день</p>
+                    <p class="business-level">Требуется: 10,000 ₽</p>
+                    <button class="btn buy-business" data-cost="10000" data-income="200">Приобрести</button>
+                </div>
+
+                <div class="option-card" id="book-store">
+                    <h3 class="option-title"><i class="fas fa-book-open"></i> Книжная лавка</h3>
+                    <p class="option-desc">Продавайте книги в небольшом магазине. Требует начальных знаний.</p>
+                    <p class="option-reward">Доход: 500 ₽/день</p>
+                    <p class="business-level">Требуется: 25,000 ₽</p>
+                    <button class="btn buy-business" data-cost="25000" data-income="500">Приобрести</button>
+                </div>
+
+                <div class="option-card" id="small-publisher">
+                    <h3 class="option-title"><i class="fas fa-print"></i> Малое издательство</h3>
+                    <p class="option-desc">Издавайте книги небольшими тиражами. Требует опыта в писательстве.</p>
+                    <p class="option-reward">Доход: 1,200 ₽/день</p>
+                    <p class="business-level">Требуется: 50,000 ₽</p>
+                    <button class="btn buy-business" data-cost="50000" data-income="1200">Приобрести</button>
+                </div>
+
+                <div class="option-card" id="big-publisher">
+                    <h3 class="option-title"><i class="fas fa-building"></i> Большое издательство</h3>
+                    <p class="option-desc">Издавайте книги крупными тиражами. Требует значительных вложений.</p>
+                    <p class="option-reward">Доход: 3,000 ₽/день</p>
+                    <p class="business-level">Требуется: 120,000 ₽</p>
+                    <button class="btn buy-business" data-cost="120000" data-income="3000">Приобрести</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Раздел Контракты -->
+        <div class="finance-section">
+            <h2 class="section-title">Контракты</h2>
+            <div class="options-grid">
+                <div class="option-card" id="contract1">
+                    <h3 class="option-title"><i class="fas fa-file-signature"></i> Детектив</h3>
+                    <div class="contract-requirements">
+                        <div class="requirement-item">
+                            <span class="requirement-label">Жанр:</span>
+                            <span class="requirement-value">Детектив</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Объем:</span>
+                            <span class="requirement-value">120 страниц</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Качество:</span>
+                            <span class="requirement-value">83%+</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Гонорар:</span>
+                            <span class="requirement-value">166%</span>
+                        </div>
+                    </div>
+                    <button class="btn take-contract">Взять контракт</button>
+                </div>
+
+                <div class="option-card" id="contract2">
+                    <h3 class="option-title"><i class="fas fa-file-signature"></i> Фэнтези</h3>
+                    <div class="contract-requirements">
+                        <div class="requirement-item">
+                            <span class="requirement-label">Жанр:</span>
+                            <span class="requirement-value">Фэнтези</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Объем:</span>
+                            <span class="requirement-value">200 страниц</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Качество:</span>
+                            <span class="requirement-value">83%+</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Гонорар:</span>
+                            <span class="requirement-value">166%</span>
+                        </div>
+                    </div>
+                    <button class="btn take-contract">Взять контракт</button>
+                </div>
+
+                <div class="option-card" id="contract3">
+                    <h3 class="option-title"><i class="fas fa-file-signature"></i> Роман</h3>
+                    <div class="contract-requirements">
+                        <div class="requirement-item">
+                            <span class="requirement-label">Жанр:</span>
+                            <span class="requirement-value">Роман</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Объем:</span>
+                            <span class="requirement-value">150 страниц</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Качество:</span>
+                            <span class="requirement-value">83%+</span>
+                        </div>
+                        <div class="requirement-item">
+                            <span class="requirement-label">Гонорар:</span>
+                            <span class="requirement-value">166%</span>
+                        </div>
+                    </div>
+                    <button class="btn take-contract">Взять контракт</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Нижняя панель навигации -->
+<div class="bottom-nav">
+    <div class="bottom-item">
+        <i class="fas fa-calendar-week"></i>
+        <span id="current-week">Неделя 1</span>
+    </div>
+    <div class="bottom-item">
+        <i class="fas fa-clock"></i>
+        <span id="game-time">День 1, 08:00</span>
+    </div>
+    <div class="bottom-item">
+        <i class="fas fa-wallet"></i>
+        <span class="money-display" id="current-money">0 ₽</span>
+    </div>
+</div>
+
+<!-- Модальное окно для мини-игры -->
+<div class="modal" id="typing-game-modal">
+    <div class="modal-content">
+        <h3 class="modal-title">Набор текста</h3>
+        <p>Наберите текст ниже как можно быстрее и без ошибок!</p>
+
+        <div class="game-container">
+            <div class="game-info">
+                <div>Скорость: <span id="typing-speed">0</span> зн./мин</div>
+                <div>Точность: <span id="typing-accuracy">100</span>%</div>
+                <div>Заработано: <span id="typing-earned">0</span> ₽</div>
+            </div>
+
+            <div class="typing-game">
+                <div class="typing-text" id="typing-target">
+                    В тот год осенняя погода стояла долго на дворе. Зимы ждали, ждали природы. Снег выпал только в январе, в ночь на третье число.
+                </div>
+                <textarea class="typing-input" id="typing-input" placeholder="Начинайте печатать здесь..."></textarea>
+            </div>
+
+            <div class="timer-bar">
+                <div class="timer-progress" id="typing-timer"></div>
+            </div>
+        </div>
+
+        <button class="close-modal" id="close-typing-game">Закрыть</button>
+    </div>
+</div>
+
+<!-- Модальное окно для игры "Память" -->
+<div class="modal" id="memory-game-modal">
+    <div class="modal-content">
+        <h3 class="modal-title">Тренировка памяти</h3>
+        <p>Запомните расположение карточек и найдите все пары!</p>
+
+        <div class="game-container">
+            <div class="game-info">
+                <div>Попытки: <span id="memory-attempts">0</span></div>
+                <div>Найдено пар: <span id="memory-matches">0</span>/8</div>
+                <div>Заработано: <span id="memory-earned">0</span> ₽</div>
+            </div>
+
+            <div class="memory-game" id="memory-game-board">
+                <!-- Карточки будут добавлены через JS -->
+            </div>
+
+            <div class="timer-bar">
+                <div class="timer-progress" id="memory-timer"></div>
+            </div>
+        </div>
+
+        <button class="close-modal" id="close-memory-game">Закрыть</button>
+    </div>
+</div>
+<div class="modal" id="click-game-modal">
+    <div class="modal-content">
+        <h3 class="modal-title">Кликер - Заработайте деньги!</h3>
+        <p>Кликайте по белым квадратам как можно быстрее!</p>
+
+        <div class="game-container">
+            <div class="click-game" id="click-game-board">
+                <!-- Квадраты будут добавлены через JS -->
+            </div>
+
+            <div class="timer-bar">
+                <div class="timer-progress" id="click-timer"></div>
+            </div>
+
+            <div class="game-stats">
+                <div>Кликов: <span id="click-count">0</span></div>
+                <div>Заработано: <span id="click-earned">0</span> ₽</div>
+            </div>
+        </div>
+
+        <button class="close-modal" id="close-click-game">Закрыть</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="js/finance.js">
+</script>
+</body>
+</html>

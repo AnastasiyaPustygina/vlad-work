@@ -1,0 +1,74 @@
+{
+  "title": "WRITER SIMULATOR 2",
+  "continue": "Continue",
+  "newGame": "New Game",
+  "language": "Change language: Русский",
+  "about": "About",
+  "aboutTitle": "About the Game",
+  "name": "Name",
+  "age": "Age",
+  "gender": "Gender",
+  "job": "Job",
+  "education": "Education",
+  "living": "Housing",
+  "transport": "Transport",
+  "level": "Level",
+  "fans": "Fans",
+  "contracts": "Contracts",
+  "sales": "Sales",
+  "books": "Books",
+  "income": "Income",
+  "exp": "Experience",
+  "aboutText": {
+    "developers": "Developer:",
+    "programmer": "Vlad Shmakov (code, design, content)",
+    "engine": "Technologies: HTML5, CSS3, JavaScript",
+    "copyright": "© 2024 Writer Simulator 2",
+    "description": "Writer Simulator 2 is a game that offers the opportunity to start from scratch and become the most famous writer in the world. The player starts by creating their own character and progresses from being an ordinary cleaner to a famous writer. The main goal of the game is to develop the character's literary skills and achieve success in their literary career."
+  },
+  "tutorials": [
+    {
+      "title": "Work",
+      "text": "Work is the main source of income at first. The higher your position and the better you perform, the more money you will earn."
+    },
+    {
+      "title": "Side jobs",
+      "text": "If you need extra money, you can take on various tasks. For example, watching ads."
+    },
+    {
+      "title": "Writing books",
+      "text": "The more books you write, the better you become at it. Don't worry if your first books aren't great."
+    },
+    {
+      "title": "Contracts",
+      "text": "To earn extra money from publishing books, you need to take contracts and fulfill all their conditions."
+    },
+    {
+      "title": "Relationships",
+      "text": "You can start relationships, have a family and children. This will give you various pleasant bonuses. You can also have pets."
+    },
+    {
+      "title": "Random events",
+      "text": "Different events can happen to you during the game. The more you play, the more events occur. They can be both good and bad."
+    },
+    {
+      "title": "Time",
+      "text": "The game has virtual time. When you are in some section (for example, writing a book), it stops."
+    },
+    {
+      "title": "Week completion",
+      "text": "If desired, you can urgently complete the week by clicking on the timer at the bottom."
+    },
+    {
+      "title": "Game saving",
+      "text": "The game is saved only at the end of the week. So be careful."
+    }
+  ],
+  "tutorial": {
+    "next": "Next",
+    "start": "Start",
+    "back": "Back",
+    "completeTitle": "Tutorial Complete",
+    "completeText": "You've learned the basics of the game. Now it's time to start your writing career!"
+  }
+}
